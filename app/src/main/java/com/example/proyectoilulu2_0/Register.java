@@ -28,15 +28,15 @@ public class Register extends AppCompatActivity {
 
     public void Registrarse (View v){
 
-        EditText Name = (EditText) findViewById(R.id.editTextRName);
-        EditText firstName = (EditText) findViewById(R.id.editTextRfirstName);
+        EditText Name = (EditText) findViewById(R.id.editTextELName);
+        EditText firstName = (EditText) findViewById(R.id.editTextElPassword);
         EditText lastName = (EditText) findViewById(R.id.editTextRlastName);
         EditText userName = (EditText) findViewById(R.id.editTextRuserName);
         EditText Mail = (EditText) findViewById(R.id.editTextRMail);
         EditText Age = (EditText) findViewById(R.id.editTextRAge);
         EditText Number = (EditText) findViewById(R.id.editTextRNumber);
-        RadioButton Gender1 = (RadioButton) findViewById(R.id.radioButtonRGender1);
-        RadioButton Gender2 = (RadioButton) findViewById(R.id.radioButtonRGender2);
+        RadioButton Gender1 = (RadioButton) findViewById(R.id.radioButtonEL1);
+        RadioButton Gender2 = (RadioButton) findViewById(R.id.radioButtonEL2);
         RadioButton Type1 = (RadioButton) findViewById(R.id.radioButtonRType1);
         RadioButton Type2 = (RadioButton) findViewById(R.id.radioButtonRType2);
         EditText Password = (EditText) findViewById(R.id.editTextRPassword);
@@ -67,7 +67,7 @@ public class Register extends AppCompatActivity {
                 }
             }
             if(Name.length() > 22 || firstName.length() > 15 || lastName.length() > 15 || userName.length() > 20 ||
-            TipoCorreo == false || Mail.length() > 25 || Age.length() > 2 || Number.length() != 8 || Password.length() > 30){
+                    TipoCorreo == false || Mail.length() > 25 || Age.length() > 2 || Number.length() != 8 || Password.length() > 30){
                 mensaje = "Parametro Erroneo";
                 if(Name.length() > 22){mensaje = "Nombre Muy Largo";}
                 if(firstName.length() > 15){mensaje = "Apellido Paterno Muy Largo";}
@@ -81,20 +81,22 @@ public class Register extends AppCompatActivity {
             }else{
                 try {
 
-                    com.example.proyectoilulu2_0.Sha1 digest = new com.example.proyectoilulu2_0.Sha1();
+                    Sha1 digest = new Sha1();
                     byte[] txtByte = digest.createSha1(userName.getText().toString() + Password.getText().toString());
                     String Sha1Password = digest.bytesToHex(txtByte);
 
-                    String ValorName = Name.getText().toString();
-                    String ValorfirstName = firstName.getText().toString();
-                    String ValorlastName = lastName.getText().toString();
-                    String ValoruserName = userName.getText().toString();
-                    String ValorMail = Mail.getText().toString();
+                    Des myDes = new Des();
+
+                    String ValorName = myDes.cifrar(Name.getText().toString());
+                    String ValorfirstName = myDes.cifrar(firstName.getText().toString());
+                    String ValorlastName = myDes.cifrar(lastName.getText().toString());
+                    String ValoruserName = myDes.cifrar(userName.getText().toString());
+                    String ValorMail = myDes.cifrar(Mail.getText().toString());
                     int ValorAge = Integer.parseInt(Age.getText().toString());
                     int ValorNumber = Integer.parseInt(Number.getText().toString());
                     boolean ValorGender = Gender1.isChecked();
                     boolean ValorType = Type1.isChecked();
-                    String ValorPassword = Sha1Password;
+                    String ValorPassword = myDes.cifrar(Sha1Password);
 
                     Json json = new Json();
                     String textoJson = json.crearJson(ValorName, ValorfirstName, ValorlastName, ValoruserName, ValorMail,
@@ -109,11 +111,15 @@ public class Register extends AppCompatActivity {
                             String lineaTexto = file.readLine();
                             file.close();
 
-                            com.example.proyectoilulu2_0.Info datos = json.leerJson(lineaTexto);
-                            String ValoruserName2 = datos.getUserName();
+                            Info datos = json.leerJson(lineaTexto);
+                            String ValoruserName2 = myDes.desCifrar(datos.getUserName());
+                            String ValorMail2 = myDes.desCifrar(datos.getMail());
+                            int ValorNumber2 = datos.getNumber();
 
-                            if (ValoruserName.equals(ValoruserName2)) {
-                                mensaje = "Usuario Ya Existente";
+                            if (ValoruserName.equals(ValoruserName2) || ValorMail.equals(ValorMail2) || ValorNumber == ValorNumber2) {
+                                if(ValorMail.equals(ValorMail2)){mensaje = "Correo Ya Registrado";}
+                                if(ValorNumber == ValorNumber2){mensaje = "Numero Ya Registrado";}
+                                if(ValoruserName.equals(ValoruserName2)){mensaje = "Usuario Ya Existente";}
                                 BucleArchivo = false;
                             } else {
                                 x = x + 1;
@@ -148,7 +154,7 @@ public class Register extends AppCompatActivity {
     }
 
     public void Volver (View v){
-        Intent intent = new Intent (Register.this, com.example.proyectoilulu2_0.Login.class);
+        Intent intent = new Intent (Register.this, Login.class);
         startActivity( intent );
     }
 }

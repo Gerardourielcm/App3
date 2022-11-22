@@ -19,7 +19,6 @@ public class Website extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_website);
-
         textview = findViewById(R.id.textView);
 
         try {
@@ -29,15 +28,18 @@ public class Website extends AppCompatActivity {
 
             BufferedReader file = new BufferedReader(new InputStreamReader(openFileInput("Archivo" + numArchivo + ".txt")));
             String lineaTexto = file.readLine();
-            com.example.proyectoilulu2_0.Info datos = json.leerJson(lineaTexto);
+            Info datos = json.leerJson(lineaTexto);
             file.close();
 
-            textview.setText("Welcome " + datos.getFirstName());
+            Des myDes = new Des();
+
+            textview.setText("Welcome " + myDes.desCifrar(datos.getFirstName()));
             getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN , WindowManager.LayoutParams.FLAG_FULLSCREEN);
             new Handler( ).postDelayed(new Runnable() {
                 @Override
                 public void run(){
-                    Intent intent = new Intent( Website.this, com.example.proyectoilulu2_0.ListMain.class);
+                    Intent intent = new Intent( Website.this, ListMain.class);
+                    intent.putExtra("numArchivo", numArchivo);
                     startActivity( intent );
                 }
             } , 4000 );

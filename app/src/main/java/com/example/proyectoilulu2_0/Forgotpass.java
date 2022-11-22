@@ -1,11 +1,11 @@
 package com.example.proyectoilulu2_0;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class Forgotpass extends AppCompatActivity {
 
@@ -20,7 +20,7 @@ public class Forgotpass extends AppCompatActivity {
     }
 
     public void Volver (View v){
-        Intent intent = new Intent (Forgotpass.this, Login.class);
+        Intent intent = new Intent (Forgotpass.this, com.example.myslash.Login.class);
         startActivity( intent );
     }
 }

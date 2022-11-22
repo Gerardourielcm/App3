@@ -1,12 +1,12 @@
 package com.example.proyectoilulu2_0;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -37,7 +37,7 @@ public class Login extends AppCompatActivity {
             }else {
                 try {
 
-                    Sha1 digest = new Sha1();
+                    com.example.myslash.Sha1 digest = new com.example.myslash.Sha1();
                     byte[] txtByte = digest.createSha1(userName.getText().toString() + Password.getText().toString());
                     String Sha1Password1 = digest.bytesToHex(txtByte);
 
@@ -71,7 +71,7 @@ public class Login extends AppCompatActivity {
 
                     if("Usuario Encontrado".equals(mensaje)){
                         Toast.makeText(Login.this, mensaje, Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(Login.this, Website.class);
+                        Intent intent = new Intent(Login.this, ListMain.class);
                         intent.putExtra("numArchivo", numArchivo);
                         startActivity(intent);
                     }

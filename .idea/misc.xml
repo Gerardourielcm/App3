@@ -3,6 +3,14 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Programitas/App3/app/src/main/res/layout/activity_list_main.xml" value="0.17074275362318841" />
+        <entry key="..\:/Programitas/App3/app/src/main/res/layout/activity_list_view_actividad.xml" value="0.17074275362318841" />
+        <entry key="..\:/Programitas/App3/app/src/main/res/layout/activity_list_view_actividad_borrar.xml" value="0.17074275362318841" />
+        <entry key="..\:/Programitas/App3/app/src/main/res/layout/activity_list_view_actividad_editar.xml" value="0.2" />
+        <entry key="..\:/Programitas/App3/app/src/main/res/layout/activity_login.xml" value="0.17074275362318841" />
+        <entry key="..\:/Programitas/App3/app/src/main/res/layout/activity_main.xml" value="0.2" />
+        <entry key="..\:/Programitas/App3/app/src/main/res/layout/activity_register.xml" value="0.2" />
+        <entry key="..\:/Programitas/App3/app/src/main/res/layout/activity_website.xml" value="0.2" />
         <entry key="..\:/Programitas/ProyectoIlulu2_0/app/src/main/res/layout/activity_forgotpass.xml" value="0.2" />
         <entry key="..\:/Programitas/ProyectoIlulu2_0/app/src/main/res/layout/activity_login.xml" value="0.2" />
         <entry key="..\:/Programitas/ProyectoIlulu2_0/app/src/main/res/layout/activity_main.xml" value="0.2" />

@@ -1,11 +1,12 @@
 package com.example.proyectoilulu2_0;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
+import android.os.Handler;
+import android.view.WindowManager;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -28,15 +29,18 @@ public class Website extends AppCompatActivity {
 
             BufferedReader file = new BufferedReader(new InputStreamReader(openFileInput("Archivo" + numArchivo + ".txt")));
             String lineaTexto = file.readLine();
-            Info datos = json.leerJson(lineaTexto);
+            com.example.myslash.Info datos = json.leerJson(lineaTexto);
             file.close();
 
             textview.setText("Welcome " + datos.getFirstName());
+            getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN , WindowManager.LayoutParams.FLAG_FULLSCREEN);
+            new Handler( ).postDelayed(new Runnable() {
+                @Override
+                public void run(){
+                    Intent intent = new Intent( Website.this, com.example.myslash.ListMain.class);
+                    startActivity( intent );
+                }
+            } , 4000 );
         }catch(Exception e){}
-    }
-
-    public void CerrarSesion (View v){
-        Intent intent = new Intent (Website.this, Login.class);
-        startActivity( intent );
     }
 }

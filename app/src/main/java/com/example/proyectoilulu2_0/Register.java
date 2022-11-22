@@ -1,7 +1,5 @@
 package com.example.proyectoilulu2_0;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,6 +8,8 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -17,6 +17,8 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 
 public class Register extends AppCompatActivity {
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,7 +67,7 @@ public class Register extends AppCompatActivity {
                 }
             }
             if(Name.length() > 22 || firstName.length() > 15 || lastName.length() > 15 || userName.length() > 20 ||
-                    TipoCorreo == false || Mail.length() > 25 || Age.length() > 2 || Number.length() != 8 || Password.length() > 30){
+            TipoCorreo == false || Mail.length() > 25 || Age.length() > 2 || Number.length() != 8 || Password.length() > 30){
                 mensaje = "Parametro Erroneo";
                 if(Name.length() > 22){mensaje = "Nombre Muy Largo";}
                 if(firstName.length() > 15){mensaje = "Apellido Paterno Muy Largo";}
@@ -79,7 +81,7 @@ public class Register extends AppCompatActivity {
             }else{
                 try {
 
-                    Sha1 digest = new Sha1();
+                    com.example.myslash.Sha1 digest = new com.example.myslash.Sha1();
                     byte[] txtByte = digest.createSha1(userName.getText().toString() + Password.getText().toString());
                     String Sha1Password = digest.bytesToHex(txtByte);
 
@@ -107,7 +109,7 @@ public class Register extends AppCompatActivity {
                             String lineaTexto = file.readLine();
                             file.close();
 
-                            Info datos = json.leerJson(lineaTexto);
+                            com.example.myslash.Info datos = json.leerJson(lineaTexto);
                             String ValoruserName2 = datos.getUserName();
 
                             if (ValoruserName.equals(ValoruserName2)) {
@@ -121,6 +123,18 @@ public class Register extends AppCompatActivity {
                             file.write(textoJson);
                             file.close();
                             mensaje = "Usuario Registrado";
+                            Name.setText("");
+                            firstName.setText("");
+                            lastName.setText("");
+                            userName.setText("");
+                            Mail.setText("");
+                            Age.setText("");
+                            Number.setText("");
+                            Gender1.setChecked(false);
+                            Gender2.setChecked(false);
+                            Type1.setChecked(false);
+                            Type2.setChecked(false);
+                            Password.setText("");
                             BucleArchivo = false;
                         }
                     }
@@ -134,7 +148,7 @@ public class Register extends AppCompatActivity {
     }
 
     public void Volver (View v){
-        Intent intent = new Intent (Register.this, Login.class);
+        Intent intent = new Intent (Register.this, com.example.myslash.Login.class);
         startActivity( intent );
     }
 }

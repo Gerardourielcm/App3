@@ -81,7 +81,7 @@ public class Register extends AppCompatActivity {
             }else{
                 try {
 
-                    com.example.myslash.Sha1 digest = new com.example.myslash.Sha1();
+                    com.example.proyectoilulu2_0.Sha1 digest = new com.example.proyectoilulu2_0.Sha1();
                     byte[] txtByte = digest.createSha1(userName.getText().toString() + Password.getText().toString());
                     String Sha1Password = digest.bytesToHex(txtByte);
 
@@ -109,7 +109,7 @@ public class Register extends AppCompatActivity {
                             String lineaTexto = file.readLine();
                             file.close();
 
-                            com.example.myslash.Info datos = json.leerJson(lineaTexto);
+                            com.example.proyectoilulu2_0.Info datos = json.leerJson(lineaTexto);
                             String ValoruserName2 = datos.getUserName();
 
                             if (ValoruserName.equals(ValoruserName2)) {
@@ -148,7 +148,7 @@ public class Register extends AppCompatActivity {
     }
 
     public void Volver (View v){
-        Intent intent = new Intent (Register.this, com.example.myslash.Login.class);
+        Intent intent = new Intent (Register.this, com.example.proyectoilulu2_0.Login.class);
         startActivity( intent );
     }
 }

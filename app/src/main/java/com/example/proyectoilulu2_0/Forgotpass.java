@@ -20,7 +20,7 @@ public class Forgotpass extends AppCompatActivity {
     }
 
     public void Volver (View v){
-        Intent intent = new Intent (Forgotpass.this, com.example.myslash.Login.class);
+        Intent intent = new Intent (Forgotpass.this, com.example.proyectoilulu2_0.Login.class);
         startActivity( intent );
     }
 }

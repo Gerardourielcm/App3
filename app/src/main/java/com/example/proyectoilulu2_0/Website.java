@@ -29,7 +29,7 @@ public class Website extends AppCompatActivity {
 
             BufferedReader file = new BufferedReader(new InputStreamReader(openFileInput("Archivo" + numArchivo + ".txt")));
             String lineaTexto = file.readLine();
-            com.example.myslash.Info datos = json.leerJson(lineaTexto);
+            com.example.proyectoilulu2_0.Info datos = json.leerJson(lineaTexto);
             file.close();
 
             textview.setText("Welcome " + datos.getFirstName());
@@ -37,7 +37,7 @@ public class Website extends AppCompatActivity {
             new Handler( ).postDelayed(new Runnable() {
                 @Override
                 public void run(){
-                    Intent intent = new Intent( Website.this, com.example.myslash.ListMain.class);
+                    Intent intent = new Intent( Website.this, com.example.proyectoilulu2_0.ListMain.class);
                     startActivity( intent );
                 }
             } , 4000 );

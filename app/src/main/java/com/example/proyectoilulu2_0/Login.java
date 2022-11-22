@@ -37,7 +37,7 @@ public class Login extends AppCompatActivity {
             }else {
                 try {
 
-                    com.example.myslash.Sha1 digest = new com.example.myslash.Sha1();
+                    com.example.proyectoilulu2_0.Sha1 digest = new com.example.proyectoilulu2_0.Sha1();
                     byte[] txtByte = digest.createSha1(userName.getText().toString() + Password.getText().toString());
                     String Sha1Password1 = digest.bytesToHex(txtByte);
 

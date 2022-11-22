@@ -12,7 +12,7 @@ public class Json extends AppCompatActivity{
     public static String crearJson(String Name , String firstName , String lastName , String userName , String Mail , int Age , int Number , boolean Gender , boolean Type , String Password )
     {
 
-        com.example.myslash.Info datos = new com.example.myslash.Info();
+        com.example.proyectoilulu2_0.Info datos = new com.example.proyectoilulu2_0.Info();
         Gson gson = new Gson();
 
         datos.setName(Name);
@@ -31,9 +31,9 @@ public class Json extends AppCompatActivity{
         return nuevojson;
     }
 
-    public static com.example.myslash.Info leerJson(String textoJson){
+    public static com.example.proyectoilulu2_0.Info leerJson(String textoJson){
         Gson gson = new Gson();
-        com.example.myslash.Info datos = gson.fromJson(textoJson, com.example.myslash.Info.class);
+        com.example.proyectoilulu2_0.Info datos = gson.fromJson(textoJson, com.example.proyectoilulu2_0.Info.class);
 
         return datos;
     }
@@ -47,7 +47,7 @@ public class Json extends AppCompatActivity{
                 file.close();
 
                 Json json = new Json();
-                com.example.myslash.Info datos = json.leerJson(lineaTexto);
+                com.example.proyectoilulu2_0.Info datos = json.leerJson(lineaTexto);
                 String Sha1Password2 = datos.getPassword();
 
                 if (Sha1Password1.equals(Sha1Password2)) {

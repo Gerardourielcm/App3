@@ -1,8 +1,5 @@
 package com.example.proyectoilulu2_0;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,6 +11,16 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.proyectoilulu2_0.Json.Cuenta;
+import com.example.proyectoilulu2_0.Json.Info;
+import com.example.proyectoilulu2_0.Json.Json;
+import com.example.proyectoilulu2_0.List.MyAdapter;
+import com.example.proyectoilulu2_0.List.MyAdapterEdit;
+import com.example.proyectoilulu2_0.List.MyAdapterRemove;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -32,8 +39,8 @@ public class ListMain extends AppCompatActivity {
     private List<Cuenta> list2;
     private ListView listView3;
     private List<Cuenta> list3;
-    private int []imagenUser = { R.drawable.user,R.drawable.user1,R.drawable.user2,R.drawable.user3};
-    private int []imagen = { R.drawable.editbutton,R.drawable.removebutton};
+    private int []imagenUser = { R.drawable.user, R.drawable.user1, R.drawable.user2, R.drawable.user3};
+    private int []imagen = { R.drawable.editbutton, R.drawable.removebutton};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,12 +56,15 @@ public class ListMain extends AppCompatActivity {
         try {
             BufferedReader fileU = new BufferedReader(new InputStreamReader(openFileInput("Archivo" + numArchivo + ".txt")));
             String lineaTextoU = fileU.readLine();
-            Info datosU = json.leerJson(lineaTextoU);
+            String completoTextoU = "";
+            while(lineaTextoU != null){
+                completoTextoU = completoTextoU + lineaTextoU;
+                lineaTextoU = fileU.readLine();
+            }
+            Info datosU = json.leerJson(completoTextoU);
             fileU.close();
 
-            Des myDes = new Des();
-
-            textView.setText("Cuentas de " + myDes.desCifrar(datosU.getUserName()));
+            textView.setText("Cuentas de " + datosU.getUserName());
 
             listView1 = (ListView) findViewById(R.id.listViewId1);
             list1 = new ArrayList<Cuenta>();
@@ -72,15 +82,20 @@ public class ListMain extends AppCompatActivity {
                 if(Cfile.exists()) {
                     BufferedReader file = new BufferedReader(new InputStreamReader(openFileInput("Archivo" + numArchivo + "." + x + ".txt")));
                     String lineaTexto = file.readLine();
+                    String completoTexto = "";
+                    while(lineaTexto != null){
+                        completoTexto = completoTexto + lineaTexto;
+                        lineaTexto = file.readLine();
+                    }
                     file.close();
 
-                    Cuenta datos = json.leerJsonCuenta(lineaTexto);
+                    Cuenta datos = json.leerJsonCuenta(completoTexto);
 
                     Cuenta cuenta1 = new Cuenta();
                     Cuenta cuenta2 = new Cuenta();
                     Cuenta cuenta3 = new Cuenta();
-                    cuenta1.setPassCuenta(myDes.desCifrar(datos.getPassCuenta()));
-                    cuenta1.setNameCuenta(myDes.desCifrar(datos.getNameCuenta()));
+                    cuenta1.setPassCuenta(datos.getPassCuenta());
+                    cuenta1.setNameCuenta(datos.getNameCuenta());
                     cuenta1.setImage(datos.getImage());
                     cuenta2.setImage(imagen[0]);
                     cuenta3.setImage(imagen[1]);
@@ -154,10 +169,15 @@ public class ListMain extends AppCompatActivity {
                     int numArchivoCuenta = getIntent().getExtras().getInt("numArchivoCuenta");
                     BufferedReader file = new BufferedReader(new InputStreamReader(openFileInput("Archivo" + numArchivo + "." + (x + 1) + ".txt")));
                     String lineaTexto = file.readLine();
+                    String completoTexto = "";
+                    while(lineaTexto != null){
+                        completoTexto = completoTexto + lineaTexto;
+                        lineaTexto = file.readLine();
+                    }
                     file.close();
 
                     BufferedWriter fileC = new BufferedWriter(new OutputStreamWriter(openFileOutput("Archivo" + numArchivo + "." + x + ".txt", Context.MODE_PRIVATE)));
-                    fileC.write(lineaTexto);
+                    fileC.write(completoTexto);
                     fileC.close();
 
                     x = x + 1;

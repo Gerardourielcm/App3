@@ -1,8 +1,10 @@
-package com.example.proyectoilulu2_0;
+package com.example.proyectoilulu2_0.List;
 
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.proyectoilulu2_0.R;
 
 public class ListViewActividadBorrar extends AppCompatActivity {
 

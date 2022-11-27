@@ -1,4 +1,4 @@
-package com.example.proyectoilulu2_0;
+package com.example.proyectoilulu2_0.Json;
 
 public class Info {
 

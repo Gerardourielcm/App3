@@ -8,6 +8,10 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.proyectoilulu2_0.Encriptación.Sha1;
+import com.example.proyectoilulu2_0.Json.Info;
+import com.example.proyectoilulu2_0.Json.Json;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.InputStreamReader;
@@ -49,14 +53,17 @@ public class Login extends AppCompatActivity {
                     while (BucleArchivo) {
                         File Cfile = new File(getApplicationContext().getFilesDir() + "/" + "Archivo" + x + ".txt");
                         if(Cfile.exists()) {
-                            Des myDes = new Des();
-
                             BufferedReader file = new BufferedReader(new InputStreamReader(openFileInput("Archivo" + x + ".txt")));
                             String lineaTexto = file.readLine();
+                            String completoTexto = "";
+                            while(lineaTexto != null){
+                                completoTexto = completoTexto + lineaTexto;
+                                lineaTexto = file.readLine();
+                            }
                             file.close();
 
-                            Info datos = json.leerJson(lineaTexto);
-                            String Sha1Password2 = myDes.desCifrar(datos.getPassword());
+                            Info datos = json.leerJson(completoTexto);
+                            String Sha1Password2 = datos.getPassword();
 
                             if (Sha1Password1.equals(Sha1Password2)) {
                                 mensaje = "Usuario Encontrado";

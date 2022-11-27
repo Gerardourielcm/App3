@@ -10,6 +10,9 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.proyectoilulu2_0.Json.Cuenta;
+import com.example.proyectoilulu2_0.Json.Json;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -20,7 +23,7 @@ public class EditList extends AppCompatActivity {
 
     private EditText Name, Password;
     private RadioButton Opcion1, Opcion2, Opcion3, Opcion4;
-    private int []imagenUser = { R.drawable.user,R.drawable.user1,R.drawable.user2,R.drawable.user3};
+    private int []imagenUser = { R.drawable.user, R.drawable.user1, R.drawable.user2, R.drawable.user3};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,14 +44,17 @@ public class EditList extends AppCompatActivity {
                 int numArchivoCuenta = getIntent().getExtras().getInt("numArchivoCuenta");
                 BufferedReader file = new BufferedReader(new InputStreamReader(openFileInput("Archivo" + numArchivo + "." + numArchivoCuenta + ".txt")));
                 String lineaTexto = file.readLine();
+                String completoTexto = "";
+                while(lineaTexto != null){
+                    completoTexto = completoTexto + lineaTexto;
+                    lineaTexto = file.readLine();
+                }
                 file.close();
 
-                Des myDes = new Des();
-
                 Json json = new Json();
-                Cuenta datos = json.leerJsonCuenta(lineaTexto);
-                String valorAccountName = myDes.desCifrar(datos.getNameCuenta());
-                String valorAccountPassword = myDes.desCifrar(datos.getPassCuenta());
+                Cuenta datos = json.leerJsonCuenta(completoTexto);
+                String valorAccountName = datos.getNameCuenta();
+                String valorAccountPassword = datos.getPassCuenta();
                 int valorAccountImage = datos.getImage();
 
                 Name.setText(valorAccountName);
@@ -75,11 +81,10 @@ public class EditList extends AppCompatActivity {
                 Toast.makeText(EditList.this, mensaje, Toast.LENGTH_SHORT).show();
             }else {
                 Json json = new Json();
-                Des myDes = new Des();
                 if (numContext == 1) {
                     try{
-                        String valorNombre = myDes.cifrar(Name.getText().toString());
-                        String valorPassword = myDes.cifrar(Password.getText().toString());
+                        String valorNombre = Name.getText().toString();
+                        String valorPassword = Password.getText().toString();
                         int valorImage = imagenUser[0];
                         if(Opcion1.isChecked()){valorImage = imagenUser[0];}
                         if(Opcion2.isChecked()){valorImage = imagenUser[1];}
@@ -107,8 +112,8 @@ public class EditList extends AppCompatActivity {
                     try{
                         int numArchivoCuenta = getIntent().getExtras().getInt("numArchivoCuenta");
 
-                        String valorNombre = myDes.cifrar(Name.getText().toString());
-                        String valorPassword = myDes.cifrar(Password.getText().toString());
+                        String valorNombre = Name.getText().toString();
+                        String valorPassword = Password.getText().toString();
                         int valorImage = imagenUser[0];
                         if(Opcion1.isChecked()){valorImage = imagenUser[0];}
                         if(Opcion2.isChecked()){valorImage = imagenUser[1];}

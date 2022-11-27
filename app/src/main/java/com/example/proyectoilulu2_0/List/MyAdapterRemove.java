@@ -1,4 +1,4 @@
-package com.example.proyectoilulu2_0;
+package com.example.proyectoilulu2_0.List;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -7,6 +7,9 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 
+import com.example.proyectoilulu2_0.Json.Cuenta;
+import com.example.proyectoilulu2_0.R;
+
 import java.io.Serializable;
 import java.util.List;
 
@@ -14,7 +17,7 @@ public class MyAdapterRemove extends BaseAdapter implements Serializable {
     private List<Cuenta> list;
     private Context context;
     private LayoutInflater layoutInflater;
-    private int []imagenes = {R.drawable.editbutton,R.drawable.removebutton};
+    private int []imagenes = {R.drawable.editbutton, R.drawable.removebutton};
 
     public MyAdapterRemove(List<Cuenta> list, Context context) {
         this.list = list;

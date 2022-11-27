@@ -8,6 +8,9 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.proyectoilulu2_0.Json.Info;
+import com.example.proyectoilulu2_0.Json.Json;
+
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
@@ -28,12 +31,15 @@ public class Website extends AppCompatActivity {
 
             BufferedReader file = new BufferedReader(new InputStreamReader(openFileInput("Archivo" + numArchivo + ".txt")));
             String lineaTexto = file.readLine();
-            Info datos = json.leerJson(lineaTexto);
+            String completoTexto = "";
+            while(lineaTexto != null){
+                completoTexto = completoTexto + lineaTexto;
+                lineaTexto = file.readLine();
+            }
+            Info datos = json.leerJson(completoTexto);
             file.close();
 
-            Des myDes = new Des();
-
-            textview.setText("Welcome " + myDes.desCifrar(datos.getFirstName()));
+            textview.setText("Welcome " + datos.getFirstName());
             getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN , WindowManager.LayoutParams.FLAG_FULLSCREEN);
             new Handler( ).postDelayed(new Runnable() {
                 @Override

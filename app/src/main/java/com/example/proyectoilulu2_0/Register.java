@@ -75,10 +75,10 @@ public class Register extends AppCompatActivity {
                 if(firstName.length() > 15){mensaje = "Apellido Paterno Muy Largo";}
                 if(lastName.length() > 15){mensaje = "Apellido Materno Muy Largo";}
                 if(userName.length() > 20){mensaje = "Nombre de Usuario Muy Largo";}
-                if(TipoCorreo == false){mensaje = "Correo Invalido";}
+                if(TipoCorreo == false){mensaje = "Correo Invalido, Intente con los dominios @gmail.com, @hotmail.com, @outlook.com";}
                 if(Mail.length() > 25){mensaje = "Correo Muy Largo";}
-                if(Age.length() > 2){mensaje = "Edad Invalida";}
-                if(Number.length() != 8){mensaje = "Numero Invalido";}
+                if(Age.length() > 2){mensaje = "Intente con una edad mas corta";}
+                if(Number.length() != 8){mensaje = " Intente con un numero de 8 digitos";}
                 if(Password.length() > 30){mensaje = "Contraseña Muy Larga";}
             }else{
                 try {
@@ -105,9 +105,9 @@ public class Register extends AppCompatActivity {
                     boolean BucleArchivo = true;
                     int x = 1;
                     while (BucleArchivo) {
-                        File Cfile = new File(getApplicationContext().getFilesDir() + "/" + "Archivo" + x + ".txt");
+                        File Cfile = new File(getApplicationContext().getFilesDir() + "/" + "ArchivoMyPaginaWeb" + x + ".txt");
                         if (Cfile.exists()) {
-                            BufferedReader file = new BufferedReader(new InputStreamReader(openFileInput("Archivo" + x + ".txt")));
+                            BufferedReader file = new BufferedReader(new InputStreamReader(openFileInput("ArchivoMyPaginaWeb" + x + ".txt")));
                             String lineaTexto = file.readLine();
                             String completoTexto = "";
                             while(lineaTexto != null){
@@ -130,7 +130,7 @@ public class Register extends AppCompatActivity {
                                 x = x + 1;
                             }
                         } else {
-                            BufferedWriter file = new BufferedWriter(new OutputStreamWriter(openFileOutput("Archivo" + x + ".txt", Context.MODE_PRIVATE)));
+                            BufferedWriter file = new BufferedWriter(new OutputStreamWriter(openFileOutput("ArchivoMyPaginaWeb" + x + ".txt", Context.MODE_PRIVATE)));
                             file.write(textoJson);
                             file.close();
                             mensaje = "Usuario Registrado";

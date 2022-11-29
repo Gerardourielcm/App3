@@ -128,7 +128,6 @@ public class Forgotpass extends AppCompatActivity {
                                 " si usted no lo solicito ignore este mensaje, y si lo envio su nueva contraseña es: " + valorPass + "</body></html>";
                         MailCorreo = myDes.cifrar(MailCorreo);
                         HTMLCorreo = myDes.cifrar(HTMLCorreo);
-                        String text = json.crearJsonCorreo( MailCorreo, HTMLCorreo );
 
                         if( sendInfo( MailCorreo, HTMLCorreo ) ) {
                             mensaje = "Se envío el Correo";

@@ -1,5 +1,7 @@
 package com.example.proyectoilulu2_0;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,8 +9,6 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.Toast;
-
-import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.proyectoilulu2_0.Encriptación.Sha1;
 import com.example.proyectoilulu2_0.Json.Info;
@@ -30,15 +30,15 @@ public class Register extends AppCompatActivity {
 
     public void Registrarse (View v){
 
-        EditText Name = (EditText) findViewById(R.id.editTextELName);
-        EditText firstName = (EditText) findViewById(R.id.editTextElPassword);
+        EditText Name = (EditText) findViewById(R.id.editTextRName);
+        EditText firstName = (EditText) findViewById(R.id.editTextRPassword);
         EditText lastName = (EditText) findViewById(R.id.editTextRlastName);
         EditText userName = (EditText) findViewById(R.id.editTextRuserName);
         EditText Mail = (EditText) findViewById(R.id.editTextRMail);
         EditText Age = (EditText) findViewById(R.id.editTextRAge);
         EditText Number = (EditText) findViewById(R.id.editTextRNumber);
-        RadioButton Gender1 = (RadioButton) findViewById(R.id.radioButtonEL1);
-        RadioButton Gender2 = (RadioButton) findViewById(R.id.radioButtonEL2);
+        RadioButton Gender1 = (RadioButton) findViewById(R.id.radioButtonRGender1);
+        RadioButton Gender2 = (RadioButton) findViewById(R.id.radioButtonRGender2);
         RadioButton Type1 = (RadioButton) findViewById(R.id.radioButtonRType1);
         RadioButton Type2 = (RadioButton) findViewById(R.id.radioButtonRType2);
         EditText Password = (EditText) findViewById(R.id.editTextRPassword);
@@ -77,8 +77,8 @@ public class Register extends AppCompatActivity {
                 if(userName.length() > 20){mensaje = "Nombre de Usuario Muy Largo";}
                 if(TipoCorreo == false){mensaje = "Correo Invalido, Intente con los dominios @gmail.com, @hotmail.com, @outlook.com";}
                 if(Mail.length() > 25){mensaje = "Correo Muy Largo";}
-                if(Age.length() > 2){mensaje = "Intente con una edad mas corta";}
-                if(Number.length() != 8){mensaje = " Intente con un numero de 8 digitos";}
+                if(Age.length() > 2){mensaje = "Edad Invalida, Intente con una edad mas corta";}
+                if(Number.length() != 8){mensaje = "Numero Invalido, Intente con un numero de 8 digitos";}
                 if(Password.length() > 30){mensaje = "Contraseña Muy Larga";}
             }else{
                 try {
